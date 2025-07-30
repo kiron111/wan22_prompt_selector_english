@@ -1,2 +1,3 @@
-# wan22_prompt_selector
+# wan22_提示选择器
 根据wan2.2官方提供的提示词文档制作的提示词选取器
+直接放到custom_nodes即可使用无需安装
