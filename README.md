@@ -1,0 +1,2 @@
+# wan22_prompt_selector
+根据wan2.2官方提供的提示词文档制作的提示词选取器
