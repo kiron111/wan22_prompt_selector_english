@@ -1,0 +1,118 @@
+{
+  "id": "7f69c28f-8682-432f-a388-7c5fb15123e6",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 22,
+  "nodes": [
+    {
+      "id": 18,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1641.3848876953125,
+        336.29632568359375
+      ],
+      "size": [
+        313.21343994140625,
+        205.3249053955078
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "1.2.5",
+        "Node name for S&R": "ShowText|pysssss",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "镜头推进，日光，赛博朋克风格，移轴摄影"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "Wan22PromptSelector",
+      "pos": [
+        1339.2978515625,
+        332.4787902832031
+      ],
+      "size": [
+        270,
+        298
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "提示词",
+          "type": "STRING",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Wan22PromptSelector",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "——",
+        "——",
+        "——",
+        "镜头推进",
+        "日光",
+        "——",
+        "——",
+        "——",
+        "——",
+        "赛博朋克",
+        "移轴摄影"
+      ]
+    }
+  ],
+  "links": [
+    [
+      22,
+      17,
+      0,
+      18,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9646149645000008,
+      "offset": [
+        -911.9903621955734,
+        65.54215451685289
+      ]
+    },
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
