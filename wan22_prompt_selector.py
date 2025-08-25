@@ -1,134 +1,134 @@
 import json
 
 class Wan22PromptSelector:
-    CATEGORY = "Wan2.2/提示词生成"
+    CATEGORY = "Wan2.2/Prompt Generation"
     FUNCTION = "generate_prompt"
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("提示词",)
+    RETURN_NAMES = ("Prompt",)
 
-    # 动态控制模块选项（空选项及非空选项均基于文档内容）
-    运动场景选项 = [
-        "——",  # 空选项
-        "跑步", "滑滑板", "踢足球", "网球", "乒乓球", 
-        "滑雪", "篮球", "橄榄球", "顶碗舞", "侧手翻"
+    # Dynamic control module options (empty and non-empty options based on documentation)
+    SportSceneOptions = [
+        "--",  # Empty option
+        "Running", "Skateboarding", "Playing Soccer", "Tennis", "Table Tennis", 
+        "Skiing", "Basketball", "Rugby", "Bowl Dance", "Cartwheel"
     ]
     
-    人物情绪选项 = [
-        "——",  # 空选项
-        "愤怒", "恐惧", "高兴", "悲伤", "惊讶", 
-        "忧虑", "困惑", "欣慰", "狂喜", "绝望", 
-        "平静", "期待", "羞涩", "厌恶", "自豪"
+    CharacterEmotionOptions = [
+        "--",  # Empty option
+        "Angry", "Fearful", "Happy", "Sad", "Surprised", 
+        "Worried", "Confused", "Relieved", "Ecstatic", "Desperate", 
+        "Calm", "Anticipatory", "Shy", "Disgusted", "Proud"
     ]
     
-    运镜方式选项 = [
-        "——",  # 空选项
-        "镜头推进", "镜头拉远", "镜头左右移动", "镜头上摇", 
-        "手持镜头", "跟随镜头", "环绕运镜"
-    ]
-
-    # 影视级美学控制模块选项（基于文档影视级美学控制章节）
-    光源类型选项 = [
-        "——",  # 空选项
-        "日光", "人工光", "月光", "实用光", "火光", 
-        "荧光", "阴天光", "混合光", "晴天光"
-    ]
-    
-    光线类型选项 = [
-        "——",  # 空选项
-        "柔光", "硬光", "顶光", "背光", "底光", "边缘光", "侧光",
-        "低对比度光", "高对比度光", "剪影光", "黎明光", "黄昏光", "日落光"
-    ]
-    
-    镜头类型选项 = [
-        "——",  # 空选项
-        "干净的单人镜头", "双人镜头", "三人镜头", "群像镜头", "定场镜头"
-    ]
-    
-    焦距选项 = [
-        "——",  # 空选项
-        "中焦距", "广角", "长焦", "望远", "超广角-鱼眼"
-    ]
-    
-    色调选项 = [
-        "——",  # 空选项
-        "暖色调", "冷色调", "高饱和度", "低饱和度"
+    CameraMovementOptions = [
+        "--",  # Empty option
+        "Camera Push In", "Camera Pull Out", "Camera Pan Left/Right", "Camera Tilt Up", 
+        "Handheld Camera", "Follow Camera", "Circular Tracking Shot"
     ]
 
-    # 风格化模块选项（基于文档风格化章节）
-    视觉风格选项 = [
-        "——",  # 空选项
-        "赛博朋克", "勾线插画", "废土风格", "毛毡风格", 
-        "3D卡通", "像素风格", "木偶动画", "水彩画"
+    # Cinematic aesthetic control module options (based on the Cinematic Aesthetic Control section of the document)
+    LightSourceTypeOptions = [
+        "--",  # Empty option
+        "Daylight", "Artificial Light", "Moonlight", "Practical Light", "Firelight", 
+        "Fluorescent Light", "Overcast Light", "Mixed Light", "Sunny Light"
     ]
     
-    特效镜头选项 = [
-        "——",  # 空选项
-        "移轴摄影", "延时拍摄"
+    LightingTypeOptions = [
+        "--",  # Empty option
+        "Soft Light", "Hard Light", "Top Light", "Backlight", "Underlight", "Rim Light", "Side Light",
+        "Low Contrast Light", "High Contrast Light", "Silhouette Light", "Dawn Light", "Dusk Light", "Sunset Light"
+    ]
+    
+    ShotTypeOptions = [
+        "--",  # Empty option
+        "Clean Single Shot", "Two Shot", "Three Shot", "Group Shot", "Establishing Shot"
+    ]
+    
+    FocalLengthOptions = [
+        "--",  # Empty option
+        "Medium Focal Length", "Wide Angle", "Telephoto", "Zoom", "Ultra Wide Angle - Fisheye"
+    ]
+    
+    ToneOptions = [
+        "--",  # Empty option
+        "Warm Tone", "Cool Tone", "High Saturation", "Low Saturation"
     ]
 
-    # 场景类型选项（基于文档场景定义）
-    场景类型选项 = [
-        "——",  # 空选项
-        "自然场景（田野/森林/山脉）", "城市场景（街道/室内/建筑）", 
-        "虚构场景（异世界/太空/梦境）"
+    # Stylization module options (based on the Stylization section of the document)
+    VisualStyleOptions = [
+        "--",  # Empty option
+        "Cyberpunk", "Line Art Illustration", "Wasteland Style", "Felt Style", 
+        "3D Cartoon", "Pixel Art Style", "Puppet Animation", "Watercolor Painting"
+    ]
+    
+    SpecialEffectShotOptions = [
+        "--",  # Empty option
+        "Tilt-Shift Photography", "Time-Lapse Photography"
     ]
 
-    # 节点输入参数定义
+    # Scene type options (based on scene definition in the document)
+    SceneTypeOptions = [
+        "--",  # Empty option
+        "Natural Scene (Field/Forest/Mountain)", "Urban Scene (Street/Indoor/Building)", 
+        "Fictional Scene (Otherworld/Space/Dream)"
+    ]
+
+    # Node input parameter definition
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
-                "场景类型": (s.场景类型选项, {"default": "——"}),
-                "运动场景": (s.运动场景选项, {"default": "——"}),
-                "人物情绪": (s.人物情绪选项, {"default": "——"}),
-                "运镜方式": (s.运镜方式选项, {"default": "——"}),
-                "光源类型": (s.光源类型选项, {"default": "——"}),
-                "光线类型": (s.光线类型选项, {"default": "——"}),
-                "镜头类型": (s.镜头类型选项, {"default": "——"}),
-                "焦距": (s.焦距选项, {"default": "——"}),
-                "色调": (s.色调选项, {"default": "——"}),
-                "视觉风格": (s.视觉风格选项, {"default": "——"}),
-                "特效镜头": (s.特效镜头选项, {"default": "——"}),
+                "SceneType": (s.SceneTypeOptions, {"default": "--"}),
+                "SportScene": (s.SportSceneOptions, {"default": "--"}),
+                "CharacterEmotion": (s.CharacterEmotionOptions, {"default": "--"}),
+                "CameraMovement": (s.CameraMovementOptions, {"default": "--"}),
+                "LightSourceType": (s.LightSourceTypeOptions, {"default": "--"}),
+                "LightingType": (s.LightingTypeOptions, {"default": "--"}),
+                "ShotType": (s.ShotTypeOptions, {"default": "--"}),
+                "FocalLength": (s.FocalLengthOptions, {"default": "--"}),
+                "Tone": (s.ToneOptions, {"default": "--"}),
+                "VisualStyle": (s.VisualStyleOptions, {"default": "--"}),
+                "SpecialEffectShot": (s.SpecialEffectShotOptions, {"default": "--"}),
             }
         }
 
-    # 提示词生成逻辑（遵循文档提示词公式）
-    def generate_prompt(self, 场景类型, 运动场景, 人物情绪, 运镜方式,
-                       光源类型, 光线类型, 镜头类型, 焦距, 色调, 视觉风格, 特效镜头):
-        # 筛选非空选项
+    # Prompt generation logic (following the document's prompt formula)
+    def generate_prompt(self, SceneType, SportScene, CharacterEmotion, CameraMovement,
+                       LightSourceType, LightingType, ShotType, FocalLength, Tone, VisualStyle, SpecialEffectShot):
+        # Filter non-empty options
         elements = [
-            场景类型 if 场景类型 != "——" else "",
-            f"主体{运动场景}" if 运动场景 != "——" else "",
-            f"呈现{人物情绪}" if 人物情绪 != "——" else "",
-            运镜方式 if 运镜方式 != "——" else "",
-            光源类型 if 光源类型 != "——" else "",
-            光线类型 if 光线类型 != "——" else "",
-            镜头类型 if 镜头类型 != "——" else "",
-            焦距 if 焦距 != "——" else "",
-            色调 if 色调 != "——" else "",
-            f"{视觉风格}风格" if 视觉风格 != "——" else "",
-            特效镜头 if 特效镜头 != "——" else ""
+            SceneType if SceneType != "--" else "",
+            f"Subject {SportScene}" if SportScene != "--" else "",
+            f"Showing {CharacterEmotion}" if CharacterEmotion != "--" else "",
+            CameraMovement if CameraMovement != "--" else "",
+            LightSourceType if LightSourceType != "--" else "",
+            LightingType if LightingType != "--" else "",
+            ShotType if ShotType != "--" else "",
+            FocalLength if FocalLength != "--" else "",
+            Tone if Tone != "--" else "",
+            f"{VisualStyle} style" if VisualStyle != "--" else "",
+            SpecialEffectShot if SpecialEffectShot != "--" else ""
         ]
-        # 去除空字符串并拼接
+        # Remove empty strings and concatenate
         prompt_parts = [e for e in elements if e]
-        prompt = "，".join(prompt_parts) if prompt_parts else ""
+        prompt = ", ".join(prompt_parts) if prompt_parts else ""
         return (prompt,)
 
-# 节点注册（插件名称尾部加入“昊纯制作”）
+# Node registration (add "Haochun Production" to the end of the plugin name)
 NODE_CLASS_MAPPINGS = {
     "Wan22PromptSelector": Wan22PromptSelector
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "Wan22PromptSelector": "Wan2.2提示词选取器 昊纯制作"
+    "Wan22PromptSelector": "Wan2.2 Prompt Selector Haochun Production"
 }
 
-# 插件元数据（名称包含“昊纯制作”）
+# Plugin metadata (name includes "Haochun Production")
 manifest = {
-    "name": "Wan2.2提示词选取器 昊纯制作",
+    "name": "Wan2.2 Prompt Selector Haochun Production",
     "version": "1.7",
-    "description": "基于Wan2.2视频生成提示词指南开发",
-    "author": "昊纯"
+    "description": "Developed based on Wan2.2 Video Generation Prompt Guide",
+    "author": "Haochun"
 }
 
 with open("manifest.json", "w", encoding="utf-8") as f:
